@@ -1,0 +1,204 @@
+---
+swagger: "2.0"
+info:
+  description: "A School Management System"
+  version: "0.0.1"
+  title: "Apna School"
+host: "localhost:8080"
+basePath: "/"
+schemes:
+  - "http"
+consumes:
+  - "application/json"
+produces:
+  - "application/json"
+paths:
+  /teacher:
+    post:
+      operationId: "addTeacher"
+      parameters:
+        - in: "body"
+          name: "teacher"
+          description: "teacher's details"
+          required: false
+          schema:
+            $ref: "#/definitions/Teacher"
+      responses:
+        201:
+          description: "teacher added"
+          schema:
+            $ref: "#/definitions/Teacher"
+        409:
+          description: "teacher already exists"
+  /teacher/signup:
+    post:
+      operationId: "SignUpTeacher"
+      parameters:
+        - in: "body"
+          name: "teacher"
+          description: "teacher's details"
+          required: false
+          schema:
+            $ref: "#/definitions/Teacher"
+      responses:
+        201:
+          description: "teacher added"
+          schema:
+            $ref: "#/definitions/Teacher"
+        409:
+          description: "teacher already exists"
+  /teacher/{ID}:
+    get:
+      operationId: "getTeacher"
+      parameters:
+        - in: "path"
+          type: "string"
+          name: "ID"
+          required: true
+          description: "UUID of the teacher"
+      description: "return teacher based on UUID"
+      responses:
+        200:
+          description: "teacher response"
+          schema:
+            $ref: "#/definitions/Teacher"
+        404:
+          description: "teacher not found"
+    put:
+      operationId: "editTeacher"
+      parameters:
+        - in: "path"
+          type: "string"
+          name: "ID"
+          required: true
+          description: "UUID of the teacher"
+      responses:
+        200:
+          description: "teacher updated"
+          schema:
+            $ref: "#/definitions/Teacher"
+        500:
+          description: "internal server error"
+    delete:
+      operationId: "deleteTeacher"
+      parameters:
+        - in: "path"
+          name: "ID"
+          type: "string"
+          description: "UUID of the teacher"
+          required: true
+      responses:
+        204:
+          description: "teacher deleted"
+        404:
+          description: "teacher not found"
+  /student:
+    post:
+      operationId: "addStudent"
+      parameters:
+        - in: "body"
+          name: "student"
+          description: "student's details"
+          required: false
+          schema:
+            $ref: "#/definitions/Student"
+      responses:
+        201:
+          description: "student added"
+          schema:
+            $ref: "#/definitions/Student"
+        409:
+          description: "student already exists"
+  /student/signup:
+    post:
+      operationId: "SignUpStudent"
+      parameters:
+        - in: "body"
+          name: "student"
+          description: "student's details"
+          required: false
+          schema:
+            $ref: "#/definitions/Student"
+      responses:
+        201:
+          description: "student added"
+          schema:
+            $ref: "#/definitions/Student"
+        409:
+          description: "student already exists"
+  /student/{ID}:
+    get:
+      operationId: "getStudent"
+      parameters:
+        - in: "path"
+          type: "string"
+          name: "ID"
+          required: true
+          description: "UUID of the student"
+      description: "return student based on UUID"
+      responses:
+        200:
+          description: "student response"
+          schema:
+            $ref: "#/definitions/Student"
+        404:
+          description: "student not found"
+    put:
+      operationId: "editStudent"
+      parameters:
+        - in: "path"
+          type: "string"
+          name: "ID"
+          required: true
+          description: "UUID of the student"
+      responses:
+        200:
+          description: "student updated"
+          schema:
+            $ref: "#/definitions/Student"
+        500:
+          description: "internal server error"
+    delete:
+      operationId: "deleteStudent"
+      parameters:
+        - in: "path"
+          name: "ID"
+          type: "string"
+          description: "UUID of the student"
+          required: true
+      responses:
+        204:
+          description: "student deleted"
+        404:
+          description: "student not found"
+definitions:
+  Teacher:
+    type: "object"
+    properties:
+      ID:
+        type: "string"
+      Name:
+        type: "string"
+      Age:
+        type: "string"
+      Department:
+        type: "string"
+      Salary:
+        type: "integer"
+      Password:
+        type: "string"
+  Student:
+    type: "object"
+    properties:
+      ID:
+        type: "string"
+      Name:
+        type: "string"
+      Age:
+        type: "string"
+      Department:
+        type: "string"
+      Grade:
+        type: "integer"
+      Password:
+        type: "string"
